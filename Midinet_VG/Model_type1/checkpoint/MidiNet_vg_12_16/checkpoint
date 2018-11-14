@@ -1,6 +1,0 @@
-model_checkpoint_path: "MidiNet.model-1300"
-all_model_checkpoint_paths: "MidiNet.model-1040"
-all_model_checkpoint_paths: "MidiNet.model-1105"
-all_model_checkpoint_paths: "MidiNet.model-1170"
-all_model_checkpoint_paths: "MidiNet.model-1235"
-all_model_checkpoint_paths: "MidiNet.model-1300"
