@@ -258,9 +258,19 @@ class MidiNet(object): ##Model 1, no 1D conditioner (chords), includes 2D condit
 
             h4 = tf.nn.relu(self.g_bn4(deconv2d(h3, [self.batch_size, 16, 1, self.gf_dim * 2],k_h=2, k_w=1,d_h=2, d_w=2 ,name='g_h4')))
             h4 = conv_prev_concat(h4, h0_prev)
+            pre_midi = deconv2d(h4, [self.batch_size, 16, 128, self.c_dim],k_h=1, k_w=128,d_h=1, d_w=2, name='g_h5')
+            
+            output_batch=[]
+            for j in range(self.batch_size):
+                output_img=[]
+                for i in range(16):
+                    activated = tf.nn.softmax(pre_midi[j,i,:,0])
+                    output_img.append(activated)                   
+                output_batch.append(output_img)   
+            output_new=tf.expand_dims(output_batch,3)
+            return output_new
 
-            return tf.nn.softmax(deconv2d(h4, [self.batch_size, 16, 128, self.c_dim],k_h=1, k_w=128,d_h=1, d_w=2, name='g_h5'),axis=2)
-
+            
     def sampler(self, z, prev_x=None): #This is the same as Generator, not trained and reusing variables
         with tf.variable_scope("generator") as scope:
             tf.get_variable_scope().reuse_variables()
