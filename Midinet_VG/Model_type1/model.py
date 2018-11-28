@@ -125,8 +125,8 @@ class MidiNet(object): ##Model 1, no 1D conditioner (chords), includes 2D condit
     
         if config.dataset == 'MidiNet_vg':
             # change the file path to your dataset
-            data_X = np.load('data_songs.npy') #Shape: (n, 1, 16, 128), where n is the number of measures(bars) of training data.
-            prev_X = np.load('data_songs_prev.npy') #Shape: (n, 1, 16, 128), if the bar is a first bar, it's previous bar = np.zeros(1,16,128)
+            data_X = np.load('data_songs_500.npy') #Shape: (n, 1, 16, 128), where n is the number of measures(bars) of training data.
+            prev_X = np.load('data_songs_prev_500.npy') #Shape: (n, 1, 16, 128), if the bar is a first bar, it's previous bar = np.zeros(1,16,128)
 
             data_X, prev_X = shuffle(data_X,prev_X, random_state=0)
             
